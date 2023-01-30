@@ -75,6 +75,7 @@ class PPTXRenderer:
                                 f"Failed to evaluate '{parts[0]}'."
                             ) from ex
                         if len(parts) > 1 and parts[1].strip().lower() == "image":
+                            result = str(result)
                             if not Path(result).exists():
                                 if skip_failed:
                                     warning(
