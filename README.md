@@ -5,6 +5,12 @@ You can insert placeholders in the ppt and also write python code in the ppt's
 notes and use either a python function or an equivalent commandline tool to
 convert it into an output rendered presentation.
 
+## Installation
+```console
+pip install pptx-renderer
+```
+
+## Usage
 Below is a simple example.
 
 ```python
@@ -60,8 +66,46 @@ command.
 pptx-renderer input_template.pptx output_file.pptx
 ```
 
-## Installation
+## Placeholders
+You can have placeholders for text, image or a table. Placeholders can be added
+inside text boxes and shapes. All placeholders should be enclosed within a pair
+of triple braces (`{{{` and `}}}`).
 
-```console
-pip install pptx-renderer
+### Text
+Any placeholder which can be evaluated into a string can act as a text placeholder.
+
+For example: `{{{"hello " * 10/2}}}` or `{{{abs(-2)}}}`
+
+### Image
+if you have added `:image` as a suffix to the python statement, the renderer will
+try to convert the value of python statement to a file location and insert an
+image from that file location.
+
+For example: `{{{"c:\temp\myimage.png":image}}}`
+
+### Table
+Tables are similar to images, but only that instead of a string, the python
+statement should evaluate to a list of lists. Then you can add `:table` as a
+suffix and it will be convert to a table inside the ppt.
+
+For example: `{{{[["col1", "col2", "col3"],[1, 2, 3]]:table}}}` will render to
+
+|col1 | col2 | col3|
+|-----|------|-----|
+|1    |2     |3    |
+
+## Code in slide notes
+You can write regular python code in the slide notes but enclosed between
+`` ```python `` and `` ``` ``.
+
+For example: Create a new pptx and write the following in the first slide's notes
+
+<pre lang="python">
+```python
+import numpy as np
+myarr = np.array([[1, 2], [3, 4]])
 ```
+</pre>
+
+And in the slide, create a rectangluar shape and add the text `{{{myarr:table}}}`
+and a text box with the text `The determinant of the array is {{{np.linalg.det(myarr)}}}`
