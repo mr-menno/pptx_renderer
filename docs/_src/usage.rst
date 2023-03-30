@@ -67,20 +67,11 @@ to the function. All of these are optional.
 Inserting Videos
 ----------------
 
-Similar to the ``image`` plugin. Following are the optional arguments.
+Insert a video in the same height and width as the shape. The placeholder
+should evaluate to a path to the video file.
 
-- ``preserve_aspect_ratio``: If set to ``True``, the image will be resized to fit
-  the shape. If set to ``False``, the image will be stretched to fit the shape.
-  Default is ``True``.
 - ``remove_shape``: If set to ``True``, the shape will be removed after the image
   is inserted. Default is ``True``.
-- ``horizontal_alignment``: The horizontal alignment of the image inside the shape.
-  Can be one of ``left``, ``center``, ``right``. Default is ``left``.
-- ``vertical_alignment``: The vertical alignment of the image inside the shape.
-  Can be one of ``top``, ``center``, ``bottom``. Default is ``top``.
-- ``poster_image`` - The path to the poster image to be displayed before the video
-  is played. Default is ``None``.
-- ``mime_type`` - The mime type of the video. Default is ``video/mp4``.
 
 Inserting tables
 ----------------
