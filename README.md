@@ -77,18 +77,18 @@ Any placeholder which can be evaluated into a string can act as a text placehold
 For example: `{{{"hello " * 10/2}}}` or `{{{abs(-2)}}}`
 
 ### Image
-if you have added `:image` as a suffix to the python statement, the renderer will
+if you have added `:image()` as a suffix to the python statement, the renderer will
 try to convert the value of python statement to a file location and insert an
 image from that file location.
 
-For example: `{{{"c:\temp\myimage.png":image}}}`
+For example: `{{{"c:\temp\myimage.png":image()}}}`
 
 ### Table
 Tables are similar to images, but only that instead of a string, the python
-statement should evaluate to a list of lists. Then you can add `:table` as a
+statement should evaluate to a list of lists. Then you can add `:table()` as a
 suffix and it will be convert to a table inside the ppt.
 
-For example: `{{{[["col1", "col2", "col3"],[1, 2, 3]]:table}}}` will render to
+For example: `{{{[["col1", "col2", "col3"],[1, 2, 3]]:table()}}}` will render to
 
 |col1 | col2 | col3|
 |-----|------|-----|
@@ -107,5 +107,5 @@ myarr = np.array([[1, 2], [3, 4]])
 ```
 </pre>
 
-And in the slide, create a rectangluar shape and add the text `{{{myarr:table}}}`
+And in the slide, create a rectangluar shape and add the text `{{{myarr:table()}}}`
 and a text box with the text `The determinant of the array is {{{np.linalg.det(myarr)}}}`

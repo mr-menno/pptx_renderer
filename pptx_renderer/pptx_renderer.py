@@ -102,7 +102,7 @@ class PPTXRenderer:
                                 f"Failed to evaluate '{parts[0]}'."
                             ) from ex
                         if len(parts) > 1:
-                            namespace = {}
+                            namespace = self.namespace.copy()
                             context = {
                                 "result": result,
                                 "presentation": outppt,

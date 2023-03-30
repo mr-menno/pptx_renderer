@@ -1,6 +1,4 @@
 from pathlib import Path
-from typing import Any
-from logging import warning
 from PIL import Image
 from .exceptions import RenderError
 
@@ -57,49 +55,19 @@ def image(
 
 def video(
     context: dict,
-    preserve_aspect_ratio=True,
-    remove_shape=True,
-    horizontal_alignment="left",
-    vertical_alignment="top",
     poster_image=None,
     mime_type="video/mp4",
+    remove_shape=True,
 ):
     result = str(context["result"])
     slide = context["slide"]
     shape = context["shape"]
-    if not Path(result).exists():
-        raise RenderError(f"Image '{result}' not found.")
-    with Image.open(result) as img:
-        im_width, im_height = img.size
-    ar_image = im_width / im_height
-    ar_shape = shape.width / shape.height
-    if not preserve_aspect_ratio:
-        width = shape.width
-        height = shape.height
-    elif ar_image >= ar_shape:
-        width = shape.width
-        height = shape.width / ar_image
-    else:
-        width = shape.height * ar_image
-        height = shape.height
-    if horizontal_alignment == "left":
-        left = shape.left
-    elif horizontal_alignment == "center":
-        left = shape.left + (shape.width - width) / 2
-    elif horizontal_alignment == "right":
-        left = shape.left + shape.width - width
-    if vertical_alignment == "top":
-        top = shape.top
-    elif vertical_alignment == "center":
-        top = shape.top + (shape.height - height) / 2
-    elif vertical_alignment == "bottom":
-        top = shape.top + shape.height - height
     slide.shapes.add_movie(
         result,
-        left,
-        top,
-        width,
-        height,
+        shape.left,
+        shape.top,
+        shape.width,
+        shape.height,
         poster_frame_image=poster_image,
         mime_type=mime_type,
     )
