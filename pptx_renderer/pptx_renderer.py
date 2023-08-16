@@ -84,7 +84,7 @@ class PPTXRenderer:
                     handle_text_frame(shape)
                 if shape.has_table:
                     handle_table(shape)
-                if shape.shape_type == GROUP:
+                if shape.shape_type == 6:
                     handle_shapes(shape.shapes)
 
         def handle_text_frame(shape):
